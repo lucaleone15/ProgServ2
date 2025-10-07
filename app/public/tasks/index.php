@@ -37,7 +37,7 @@ $tasks = $tasksManager->getTasks();
                 <tr>
                     <th>Nom</th>
                     <th>Description</th>
-                    <th>Status</th>
+                    <th>Statut</th>
                     <th>Priorité</th>
                     <th>Date limite</th>
                     <th>Catégorie</th>

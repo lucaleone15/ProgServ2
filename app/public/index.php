@@ -18,7 +18,7 @@
         <p>Bienvenue sur la page d'accueil de TaskBoard.</p>
 
 
-        <p><a href="tools/index.php"><button>Aller à la gestion des tâches</button></a></p>
+        <p><a href="tasks/index.php"><button>Aller à la gestion des tâches</button></a></p>
     </main>
 </body>
 
