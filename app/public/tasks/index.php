@@ -53,7 +53,10 @@ $tasks = $tasksManager->getTasks();
                         <td><?= htmlspecialchars($task->getEndDate()->format('Y-m-d')) ?></td>
                         <td><?= htmlspecialchars(Task::CATEGORIES[$task->getCategory()]) ?></td>
                         <td>
-                            <a href="delete.php?id=<?= htmlspecialchars($task->getId()) ?>"><button>Supprimer</button></a>
+                            <a href="view.php?id=<?= $task->getId(); ?>" role="button">Voir</a>
+                            <a href="edit.php?id=<?= $task->getId(); ?>" role="button">Modifier</a>
+                            <a href="delete.php?id=<?= $task->getId(); ?>" role="button" class="secondary"
+                               onclick="return confirm('Supprimer cette tâche ?');">Supprimer</a>
                         </td>
                     </tr>
                 <?php } ?>

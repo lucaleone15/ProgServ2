@@ -65,4 +65,50 @@ class TasksManager implements TasksManagerInterface {
 
         return $stmt->execute();
     }
+
+    public function getTaskById(int $id): ?Task {
+        $sql = "SELECT * FROM tasks WHERE id = :id";
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        $task = $stmt->fetch();
+
+        if (!$task) {
+            return null;
+        }
+
+        return new Task(
+            $task['id'],
+            $task['name'],
+            $task['description'],
+            $task['status'],
+            $task['priority'],
+            new \DateTime($task['end_date']),
+            $task['category']
+        );
+    }
+
+    public function updateTask(int $id, Task $task): bool {
+        $sql = "UPDATE tasks
+                SET name = :name,
+                    description = :description,
+                    status = :status,
+                    priority = :priority,
+                    end_date = :end_date,
+                    category = :category
+                WHERE id = :id";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':name', $task->getName());
+        $stmt->bindValue(':description', $task->getDescription());
+        $stmt->bindValue(':status', $task->getStatus());
+        $stmt->bindValue(':priority', $task->getPriority());
+        $stmt->bindValue(':end_date', $task->getEndDate()->format('Y-m-d'));
+        $stmt->bindValue(':category', $task->getCategory());
+
+        return $stmt->execute();
+    }
 }
