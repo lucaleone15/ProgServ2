@@ -1,26 +1,30 @@
 <?php
 require __DIR__ . '/../../src/utils/autoloader.php';
 
-use Tools\ToolsManager;
-use Tools\Tool;
+use Tasks\TasksManager;
+use Tasks\Task;
 
-$toolsManager = new ToolsManager();
+$tasksManager = new TasksManager();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = $_POST["name"];
-    $type = $_POST["type"];
-    $purchaseDate = $_POST["purchase-date"];
-    $price = $_POST["price"];
+    $description = $_POST["description"];
+    $status = $_POST["status"];
+    $priority = $_POST["priority"];
+    $endDate = $_POST["end-date"];
+    $category = $_POST["category"];
 
     $errors = [];
 
     try {
-        $tool = new Tool(
+        $task = new Task(
             null,
             $name,
-            $type,
-            new \DateTime($purchaseDate),
-            (float) $price
+            $description,
+            $status,
+            $priority,
+            new \DateTime($endDate),
+            $category
         );
     } catch (InvalidArgumentException $e) {
         $errors[] = $e->getMessage();
@@ -28,13 +32,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (empty($errors)) {
         try {
-            $toolId = $toolsManager->addTool($tool);
+            $taskId = $tasksManager->addTask($task);
 
             header("Location: index.php");
             exit();
         } catch (PDOException $e) {
             if ($e->getCode() === "23000") {
-                $errors[] = "L'outil existe déjà.";
+                $errors[] = "La tâche existe déjà.";
             } else {
                 $errors[] = "Erreur lors de l'interaction avec la base de données : " . $e->getMessage();
             }
@@ -55,14 +59,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
 
-    <title>Créer un nouvel outil | MyApp</title>
+    <title>Créer une nouvelle tâche | TaskBoard</title>
 </head>
 
 <body>
     <main class="container">
-        <h1>Créer un nouvel outil</h1>
+        <h1>Créer une nouvelle tâche</h1>
 
-        <p><a href="../index.php">Accueil</a> > <a href="index.php">Gestion des outils</a> > Création d'un nouvel outil</p>
+        <p><a href="../index.php">Accueil</a> > <a href="index.php">Gestion des tâches</a> > Création d'une nouvelle tâche</p>
 
         <?php if ($_SERVER["REQUEST_METHOD"] === "POST") { ?>
             <?php if (empty($errors)) { ?>
@@ -81,18 +85,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <label for="name">Nom</label>
             <input type="text" id="name" name="name" value="<?= htmlspecialchars($name ?? ''); ?>" required minlength="2">
 
-            <label for="type">Type</label>
-            <select id="type" name="type" required>
-                <?php foreach (Tool::TYPES as $key => $value) { ?>
-                    <option value="<?= $key ?>" <?php if (isset($type) && $type === $key) echo "selected"; ?>><?= $value ?></option>
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" value="<?= htmlspecialchars($description ?? ''); ?>">
+
+            <label for="status">Statut</label>
+            <select id="status" name="status" required>
+                <?php foreach (Task::STATUS as $key => $value) { ?>
+                    <option value="<?= $key ?>" <?php if (isset($status) && $type === $key) echo "selected"; ?>><?= $value ?></option>
                 <?php } ?>
             </select>
 
-            <label for="purchase-date">Date d'achat</label>
-            <input type="date" id="purchase-date" name="purchase-date" value="<?= htmlspecialchars($purchaseDate ?? ''); ?>" required>
+            <label for="priority">Priorité</label>
+            <select id="priority" name="priority" required>
+                <?php foreach (Task::PRIORITIES as $key => $value) { ?>
+                    <option value="<?= $key ?>" <?php if (isset($priority) && $type === $key) echo "selected"; ?>><?= $value ?></option>
+                <?php } ?>
+            </select>
 
-            <label for="price">Prix</label>
-            <input type="number" id="price" name="price" value="<?= htmlspecialchars($price ?? ''); ?>" required min="0">
+            <label for="end-date">Date limite</label>
+            <input type="date" id="end-date" name="end-date" value="<?= htmlspecialchars($endDate ?? ''); ?>" required>
+
+            <label for="category">Catégorie</label>
+            <select id="category" name="category" required>
+                <?php foreach (Task::CATEGORIES as $key => $value) { ?>
+                    <option value="<?= $key ?>" <?php if (isset($category) && $type === $key) echo "selected"; ?>><?= $value ?></option>
+                <?php } ?>
+            </select>
 
             <button type="submit">Créer</button>
         </form>

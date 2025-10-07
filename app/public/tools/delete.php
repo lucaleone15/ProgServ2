@@ -1,14 +1,14 @@
 <?php
 require __DIR__ . '/../../src/utils/autoloader.php';
 
-use Tools\ToolsManager;
+use Tasks\TasksManager;
 
-$toolsManager = new ToolsManager();
+$tasksManager = new TasksManager();
 
 if (isset($_GET["id"])) {
-    $toolId = $_GET["id"];
+    $taskId = $_GET["id"];
 
-    $toolsManager->removeTool($toolId);
+    $tasksManager->removeTask($taskId);
 
     header("Location: index.php");
     exit();

@@ -1,12 +1,12 @@
 <?php
 require __DIR__ . '/../../src/utils/autoloader.php';
 
-use Tools\ToolsManager;
-use Tools\Tool;
+use Tasks\TasksManager;
+use Tasks\Task;
 
-$toolsManager = new ToolsManager();
+$tasksManager = new TasksManager();
 
-$tools = $toolsManager->getTools();
+$tasks = $tasksManager->getTasks();
 ?>
 
 <!DOCTYPE html>
@@ -19,38 +19,41 @@ $tools = $toolsManager->getTools();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
 
-    <title>Gestion des outils | MyApp</title>
+    <title>Gestion des tâches | TaskBoard</title>
 </head>
 
 <body>
     <main class="container">
-        <h1>Gestion des outils</h1>
+        <h1>Gestion des tâches</h1>
 
-        <p><a href="../index.php">Accueil</a> > Gestion des outils</p>
+        <p><a href="../index.php">Accueil</a> > Gestion des tâches</p>
 
-        <h2>Liste des outils</h2>
+        <h2>Liste des tâches</h2>
 
-        <p><a href="create.php"><button>Créer un nouvel outil</button></a></p>
+        <p><a href="create.php"><button>Créer une nouvelle tâche</button></a></p>
 
         <table>
             <thead>
                 <tr>
                     <th>Nom</th>
-                    <th>Type</th>
-                    <th>Date d'achat</th>
-                    <th>Prix</th>
-                    <th>Actions</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Priorité</th>
+                    <th>Date limite</th>
+                    <th>Catégorie</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($tools as $tool) { ?>
+                <?php foreach ($tasks as $task) { ?>
                     <tr>
-                        <td><?= htmlspecialchars($tool->getName()) ?></td>
-                        <td><?= htmlspecialchars(Tool::TYPES[$tool->getType()]) ?></td>
-                        <td><?= htmlspecialchars($tool->getPurchaseDate()->format('Y-m-d')) ?></td>
-                        <td><?= htmlspecialchars($tool->getPrice()) ?></td>
+                        <td><?= htmlspecialchars($task->getName()) ?></td>
+                        <td><?= htmlspecialchars($task->getDescription()) ?></td>
+                        <td><?= htmlspecialchars(Task::STATUS[$task->getStatus()]) ?></td>
+                        <td><?= htmlspecialchars(Task::PRIORITIES[$task->getPriority()]) ?></td>
+                        <td><?= htmlspecialchars($task->getEndDate()->format('Y-m-d')) ?></td>
+                        <td><?= htmlspecialchars(Task::CATEGORIES[$task->getCategory()]) ?></td>
                         <td>
-                            <a href="delete.php?id=<?= htmlspecialchars($tool->getId()) ?>"><button>Supprimer</button></a>
+                            <a href="delete.php?id=<?= htmlspecialchars($task->getId()) ?>"><button>Supprimer</button></a>
                         </td>
                     </tr>
                 <?php } ?>

@@ -8,17 +8,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="css/custom.css">
 
-    <title>Page d'accueil | MyApp</title>
+    <title>Page d'accueil | TaskBoard</title>
 </head>
 
 <body>
     <main class="container">
         <h1>Page d'accueil</h1>
 
-        <p>Bienvenue sur la page d'accueil de MyApp.</p>
+        <p>Bienvenue sur la page d'accueil de TaskBoard.</p>
 
 
-        <p><a href="tools/index.php"><button>Aller à la gestion des outils</button></a></p>
+        <p><a href="tools/index.php"><button>Aller à la gestion des tâches</button></a></p>
     </main>
 </body>
 

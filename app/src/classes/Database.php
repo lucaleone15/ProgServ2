@@ -28,12 +28,14 @@ class Database implements DatabaseInterface {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
 
-        $sql = "CREATE TABLE IF NOT EXISTS tools (
+        $sql = "CREATE TABLE IF NOT EXISTS tasks (
             id INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(100) NOT NULL UNIQUE,
-            type VARCHAR(100) NOT NULL,
-            purchase_date DATE NOT NULL,
-            price FLOAT NOT NULL
+            description VARCHAR(200),
+            status TEXT NOT NULL,
+            priority TEXT NOT NULL,
+            end_date DATE NOT NULL,
+            category TEXT NOT NULL
         );";
 
         $stmt = $this->pdo->prepare($sql);

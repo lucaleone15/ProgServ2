@@ -20,7 +20,7 @@ Le site sera disponible en deux langues (**français/anglais**) et accessible de
 - **Tableau de bord** : aperçu des tâches à venir et résumé des projets.  
 - **Gestion des tâches** :
   - Créer, modifier, supprimer une tâche.  
-  - Donner un nom, une description facultative, un type personnalisé, un état (*en cours*, *complétée*, *à faire*), une priorité (*Haute*, *Moyenne*, *Faible*) et une date de fin.  
+  - Donner un nom, une description facultative, un état (*en cours*, *complétée*, *à faire*), une priorité (*Haute*, *Moyenne*, *Faible*) et une date de fin.  
   - Associer une tâche à une catégorie (*Travail, Études, Loisirs, Personnel*).  
 - **Profil utilisateur** : modifier ses informations personnelles et son mot de passe.  
 
