@@ -7,7 +7,7 @@
 
 ## Thème
 Créer une application web de gestion de tâches permettant aux utilisateurs de gérer leur organisation personnelle et de collaborer avec d’autres personnes.  
-Le site sera disponible en deux langues (**français/anglais**) et accessible depuis Internet.
+Le site sera disponible en deux langues (**français/anglais**) et accessible depuis Internet à l’adresse suivante : [https://taskboard.ch](https://taskboard.ch)
 
 ## Fonctionnalités
 
