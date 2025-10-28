@@ -120,9 +120,9 @@ class Task implements TaskInterface {
 
     public function setStatus(string $status): void {
         if (empty($status)) {
-            throw new \InvalidArgumentException("Le type de la tâche est requis.");
+            throw new \InvalidArgumentException("Le statut de la tâche est requis.");
         } else if (!array_key_exists($status, self::STATUS)) {
-            throw new \InvalidArgumentException("Le type de la tâche est invalide.");
+            throw new \InvalidArgumentException("Le statut de la tâche est invalide.");
         }
 
         $this->status = $status;
