@@ -1,16 +1,17 @@
 <?php
 require __DIR__ . '/../../src/utils/autoloader.php';
-require __DIR__ . '/../../src/i18n/load-translation.php';
 
 use Tasks\TasksManager;
 use Tasks\Task;
 
 $tasksManager = new TasksManager();
+
 $tasks = $tasksManager->getTasks();
 ?>
 
 <!DOCTYPE html>
-<html lang="<?= htmlspecialchars(__lang()) ?>">
+<html lang="fr">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,40 +19,32 @@ $tasks = $tasksManager->getTasks();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
 
-    <title><?= __t('index.title') ?></title>
+    <title>Gestion des tâches | TaskBoard</title>
 </head>
 
 <body>
     <main class="container">
-        <h1><?= __t('index.h1') ?></h1>
+        <h1>Gestion des tâches</h1>
 
-        <p>
-            <a href="../index.php"><?= __t('index.breadcrumb.home') ?></a> >
-            <?= __t('index.breadcrumb.current') ?>
-        </p>
+        <p><a href="../index.php">Accueil</a> > Gestion des tâches</p>
 
-        <h2><?= __t('index.h2') ?></h2>
+        <h2>Liste des tâches</h2>
 
-        <p>
-            <a href="create.php">
-                <button type="button"><?= __t('index.create_btn') ?></button>
-            </a>
-        </p>
+        <p><a href="create.php"><button>Créer une nouvelle tâche</button></a></p>
 
         <table>
             <thead>
                 <tr>
-                    <th><?= __t('global.name') ?></th>
-                    <th><?= __t('global.description') ?></th>
-                    <th><?= __t('global.status') ?></th>
-                    <th><?= __t('global.priority') ?></th>
-                    <th><?= __t('global.date') ?></th>
-                    <th><?= __t('global.category') ?></th>
-                    <th><?= __t('global.view_task') ?></th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Statut</th>
+                    <th>Priorité</th>
+                    <th>Date limite</th>
+                    <th>Catégorie</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($tasks as $task) : ?>
+                <?php foreach ($tasks as $task) { ?>
                     <tr>
                         <td><?= htmlspecialchars($task->getName()) ?></td>
                         <td><?= htmlspecialchars($task->getDescription()) ?></td>
@@ -60,17 +53,16 @@ $tasks = $tasksManager->getTasks();
                         <td><?= htmlspecialchars($task->getEndDate()->format('Y-m-d')) ?></td>
                         <td><?= htmlspecialchars(Task::CATEGORIES[$task->getCategory()]) ?></td>
                         <td>
-                            <a href="view.php?id=<?= $task->getId(); ?>" role="button"><?= __t('global.view_task') ?></a>
-                            <a href="edit.php?id=<?= $task->getId(); ?>" role="button"><?= __t('global.modify_task') ?></a>
+                            <a href="view.php?id=<?= $task->getId(); ?>" role="button">Voir</a>
+                            <a href="edit.php?id=<?= $task->getId(); ?>" role="button">Modifier</a>
                             <a href="delete.php?id=<?= $task->getId(); ?>" role="button" class="secondary"
-                               onclick="return confirm('<?= __t('global.confirm_delete') ?>');">
-                                <?= __t('global.delete_task') ?>
-                            </a>
+                               onclick="return confirm('Supprimer cette tâche ?');">Supprimer</a>
                         </td>
                     </tr>
-                <?php endforeach; ?>
+                <?php } ?>
             </tbody>
         </table>
     </main>
 </body>
+
 </html>

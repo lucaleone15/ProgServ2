@@ -9,7 +9,7 @@ class Database implements DatabaseInterface {
         $config = parse_ini_file(self::DATABASE_CONFIGURATION_FILE, true);
 
         if (!$config) {
-            throw new Exception(__t('database.error') . self::DATABASE_CONFIGURATION_FILE);
+            throw new Exception("Erreur lors de la lecture du fichier de configuration : " . self::DATABASE_CONFIGURATION_FILE);
         }
 
         $host = $config['host'];

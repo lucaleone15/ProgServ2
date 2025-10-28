@@ -1,6 +1,5 @@
 <?php
 require __DIR__ . '/../../src/utils/autoloader.php';
-require __DIR__ . '/../../src/i18n/load-translation.php';
 
 use Tasks\TasksManager;
 use Tasks\Task;
@@ -39,19 +38,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit();
         } catch (PDOException $e) {
             if ($e->getCode() === "23000") {
-                $errors[] = __t('create.existing_task');
+                $errors[] = "La tâche existe déjà.";
             } else {
-                $errors[] = __t('create.db_error') . $e->getMessage();
+                $errors[] = "Erreur lors de l'interaction avec la base de données : " . $e->getMessage();
             }
         } catch (Exception $e) {
-            $errors[] = __t('create.unexpected_error') . $e->getMessage();
+            $errors[] = "Erreur inattendue : " . $e->getMessage();
         }
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="<?= htmlspecialchars(__lang()) ?>">
+<html>
 
 <head>
     <meta charset="utf-8">
@@ -60,65 +59,62 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
 
-    <title><?= __t('create.title') ?></title>
+    <title>Créer une nouvelle tâche | TaskBoard</title>
 </head>
 
 <body>
     <main class="container">
-        <h1><?= __t('create.h1') ?></h1>
+        <h1>Créer une nouvelle tâche</h1>
 
-        <p>
-            <a href="../index.php"><?= __t('index_breadcrumb') ?? __t('home.title') ?></a> >
-            <a href="index.php"><?= __t('index.title') ?></a> >
-            <?= __t('create.breadcrumb') ?>
-        </p>
+        <p><a href="../index.php">Accueil</a> > <a href="index.php">Gestion des tâches</a> > Création d'une nouvelle tâche</p>
 
         <?php if ($_SERVER["REQUEST_METHOD"] === "POST") { ?>
             <?php if (empty($errors)) { ?>
-                <p style="color: green;"><?= __t('create.success') ?></p>
+                <p style="color: green;">Le formulaire a été soumis avec succès !</p>
             <?php } else { ?>
-                <p style="color: red;"><?= __t('create.failed') ?></p>
+                <p style="color: red;">Le formulaire contient des erreurs :</p>
                 <ul>
                     <?php foreach ($errors as $error) { ?>
-                        <li><?= htmlspecialchars($error) ?></li>
+                        <li><?php echo $error; ?></li>
                     <?php } ?>
                 </ul>
             <?php } ?>
         <?php } ?>
 
         <form action="create.php" method="POST">
-            <label for="name"><?= __t('global.name') ?></label>
+            <label for="name">Nom</label>
             <input type="text" id="name" name="name" value="<?= htmlspecialchars($name ?? ''); ?>" required minlength="2">
 
-            <label for="description"><?= __t('global.description') ?></label>
+            <label for="description">Description</label>
             <input type="text" id="description" name="description" value="<?= htmlspecialchars($description ?? ''); ?>">
 
-            <label for="status"><?= __t('global.status') ?></label>
+            <label for="status">Statut</label>
             <select id="status" name="status" required>
                 <?php foreach (Task::STATUS as $key => $value) { ?>
-                    <option value="<?= $key ?>" <?= (isset($status) && $status === $key) ? 'selected' : '' ?>><?= $value ?></option>
+                    <option value="<?= $key ?>" <?php if (isset($status) && $type === $key) echo "selected"; ?>><?= $value ?></option>
                 <?php } ?>
             </select>
 
-            <label for="priority"><?= __t('global.priority') ?></label>
+            <label for="priority">Priorité</label>
             <select id="priority" name="priority" required>
                 <?php foreach (Task::PRIORITIES as $key => $value) { ?>
-                    <option value="<?= $key ?>" <?= (isset($priority) && $priority === $key) ? 'selected' : '' ?>><?= $value ?></option>
+                    <option value="<?= $key ?>" <?php if (isset($priority) && $type === $key) echo "selected"; ?>><?= $value ?></option>
                 <?php } ?>
             </select>
 
-            <label for="end-date"><?= __t('global.date') ?></label>
+            <label for="end-date">Date limite</label>
             <input type="date" id="end-date" name="end-date" value="<?= htmlspecialchars($endDate ?? ''); ?>" required>
 
-            <label for="category"><?= __t('global.category') ?></label>
+            <label for="category">Catégorie</label>
             <select id="category" name="category" required>
                 <?php foreach (Task::CATEGORIES as $key => $value) { ?>
-                    <option value="<?= $key ?>" <?= (isset($category) && $category === $key) ? 'selected' : '' ?>><?= $value ?></option>
+                    <option value="<?= $key ?>" <?php if (isset($category) && $type === $key) echo "selected"; ?>><?= $value ?></option>
                 <?php } ?>
             </select>
 
-            <button type="submit"><?= __t('create.submit') ?></button>
+            <button type="submit">Créer</button>
         </form>
     </main>
 </body>
+
 </html>
