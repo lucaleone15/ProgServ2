@@ -68,8 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h1><?= __t('create.h1') ?></h1>
 
         <p>
-            <a href="../index.php"><?= __t('index_breadcrumb') ?? __t('home.title') ?></a> >
-            <a href="index.php"><?= __t('index.title') ?></a> >
+            <a href="../index.php"><?= __t('index.breadcrumb.home') ?></a> >
+            <a href="index.php"><?= __t('index.breadcrumb.current') ?></a> >
             <?= __t('create.breadcrumb') ?>
         </p>
 
@@ -95,15 +95,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <label for="status"><?= __t('global.status') ?></label>
             <select id="status" name="status" required>
-                <?php foreach (Task::STATUS as $key => $value) { ?>
-                    <option value="<?= $key ?>" <?= (isset($status) && $status === $key) ? 'selected' : '' ?>><?= $value ?></option>
+                <?php foreach (Task::getTranslatedStatuses() as $key => $value) { ?>
+                    <option value="<?= $key ?>" <?= (isset($status) && $status === $key) ? 'selected' : '' ?>><?= htmlspecialchars($value) ?></option>
                 <?php } ?>
             </select>
 
             <label for="priority"><?= __t('global.priority') ?></label>
             <select id="priority" name="priority" required>
-                <?php foreach (Task::PRIORITIES as $key => $value) { ?>
-                    <option value="<?= $key ?>" <?= (isset($priority) && $priority === $key) ? 'selected' : '' ?>><?= $value ?></option>
+                <?php foreach (Task::getTranslatedPriorities() as $key => $value) { ?>
+                    <option value="<?= $key ?>" <?= (isset($priority) && $priority === $key) ? 'selected' : '' ?>><?= htmlspecialchars($value) ?></option>
                 <?php } ?>
             </select>
 
@@ -112,8 +112,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <label for="category"><?= __t('global.category') ?></label>
             <select id="category" name="category" required>
-                <?php foreach (Task::CATEGORIES as $key => $value) { ?>
-                    <option value="<?= $key ?>" <?= (isset($category) && $category === $key) ? 'selected' : '' ?>><?= $value ?></option>
+                <?php foreach (Task::getTranslatedCategories() as $key => $value) { ?>
+                    <option value="<?= $key ?>" <?= (isset($category) && $category === $key) ? 'selected' : '' ?>><?= htmlspecialchars($value) ?></option>
                 <?php } ?>
             </select>
 
@@ -121,4 +121,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </form>
     </main>
 </body>
+
 </html>
