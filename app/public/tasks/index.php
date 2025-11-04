@@ -11,18 +11,42 @@ $tasks = $tasksManager->getTasks();
 
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars(__lang()) ?>">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
 
     <title><?= __t('index.title') ?></title>
+
+    <style>
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-top: 1rem;
+        }
+
+        .logo-container img {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+
 </head>
 
 <body>
     <main class="container">
+
+        <!-- Logo -->
+        <div class="logo-container">
+            <a href="index.php">
+                <img src="../assets/img/taskboard.png" alt="Taskboard Logo">
+            </a>
+        </div>
+
         <h1><?= __t('index.h1') ?></h1>
 
         <p>
@@ -63,7 +87,7 @@ $tasks = $tasksManager->getTasks();
                             <a href="view.php?id=<?= $task->getId(); ?>" role="button"><?= __t('global.view_task') ?></a>
                             <a href="edit.php?id=<?= $task->getId(); ?>" role="button"><?= __t('global.modify_task') ?></a>
                             <a href="delete.php?id=<?= $task->getId(); ?>" role="button" class="secondary"
-                               onclick="return confirm('<?= __t('global.confirm_delete') ?>');">
+                                onclick="return confirm('<?= __t('global.confirm_delete') ?>');">
                                 <?= __t('global.delete_task') ?>
                             </a>
                         </td>
@@ -73,4 +97,5 @@ $tasks = $tasksManager->getTasks();
         </table>
     </main>
 </body>
+
 </html>

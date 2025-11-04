@@ -61,12 +61,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= __t('edit.title') ?></title>
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
+
+    <style>
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-top: 1rem;
+        }
+
+        .logo-container img {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+
 </head>
 
 <body>
     <main class="container">
+
+        <!-- Logo -->
+        <div class="logo-container">
+            <a href="index.php">
+                <img src="../assets/img/taskboard.png" alt="Taskboard Logo">
+            </a>
+        </div>
+
         <h1><?= __t('edit.h1') ?></h1>
 
         <p><a href="index.php"><?= __t('edit.breadcrumb') ?></a></p>
