@@ -15,6 +15,7 @@ return [
         'modify_task' => 'Modifier',
         'delete_task' => 'Supprimer',
         'confirm_delete' => 'Supprimer cette tâche ?',
+        'actions' => 'Actions',
     ],
 
     // HOME PAGE
@@ -87,8 +88,8 @@ return [
 
     // TASK STATUS
     'task_status' => [
-        'todo' => 'À faire',
-        'inprogress' => 'En cours',
+        'to_do' => 'À faire',
+        'in_progress' => 'En cours',
         'completed' => 'Terminé',
     ],
 

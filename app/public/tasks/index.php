@@ -47,7 +47,7 @@ $tasks = $tasksManager->getTasks();
                     <th><?= __t('global.priority') ?></th>
                     <th><?= __t('global.date') ?></th>
                     <th><?= __t('global.category') ?></th>
-                    <th><?= __t('global.view_task') ?></th>
+                    <th><?= __t('global.actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -55,10 +55,10 @@ $tasks = $tasksManager->getTasks();
                     <tr>
                         <td><?= htmlspecialchars($task->getName()) ?></td>
                         <td><?= htmlspecialchars($task->getDescription()) ?></td>
-                        <td><?= htmlspecialchars(Task::STATUS[$task->getStatus()]) ?></td>
-                        <td><?= htmlspecialchars(Task::PRIORITIES[$task->getPriority()]) ?></td>
+                        <td><?= htmlspecialchars($task->getTranslatedStatus()) ?></td>
+                        <td><?= htmlspecialchars($task->getTranslatedPriority()) ?></td>
                         <td><?= htmlspecialchars($task->getEndDate()->format('Y-m-d')) ?></td>
-                        <td><?= htmlspecialchars(Task::CATEGORIES[$task->getCategory()]) ?></td>
+                        <td><?= htmlspecialchars($task->getTranslatedCategory()) ?></td>
                         <td>
                             <a href="view.php?id=<?= $task->getId(); ?>" role="button"><?= __t('global.view_task') ?></a>
                             <a href="edit.php?id=<?= $task->getId(); ?>" role="button"><?= __t('global.modify_task') ?></a>

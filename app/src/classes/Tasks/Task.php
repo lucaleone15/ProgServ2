@@ -13,7 +13,6 @@ class Task implements TaskInterface {
     private \DateTime $endDate;
     private string $category;
 
-    // Identifiants seulement, les labels sont traduits via __t() dans les vues
     const STATUS = [
         'to_do' => 'to_do',
         'in_progress' => 'in_progress',
@@ -70,6 +69,44 @@ class Task implements TaskInterface {
 
     public function getCategory(): string {
         return $this->category;
+    }
+
+    // --- MÉTHODES POUR OBTENIR LES VALEURS TRADUITES ---
+    
+    public function getTranslatedStatus(): string {
+        return __t('task_status.' . $this->status);
+    }
+
+    public function getTranslatedPriority(): string {
+        return __t('task_priority.' . $this->priority);
+    }
+
+    public function getTranslatedCategory(): string {
+        return __t('task_category.' . $this->category);
+    }
+
+    public static function getTranslatedStatuses(): array {
+        $translated = [];
+        foreach (self::STATUS as $key => $value) {
+            $translated[$key] = __t('task_status.' . $key);
+        }
+        return $translated;
+    }
+
+    public static function getTranslatedPriorities(): array {
+        $translated = [];
+        foreach (self::PRIORITIES as $key => $value) {
+            $translated[$key] = __t('task_priority.' . $key);
+        }
+        return $translated;
+    }
+
+    public static function getTranslatedCategories(): array {
+        $translated = [];
+        foreach (self::CATEGORIES as $key => $value) {
+            $translated[$key] = __t('task_category.' . $key);
+        }
+        return $translated;
     }
 
     // --- SETTERS ---

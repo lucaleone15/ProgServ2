@@ -47,13 +47,13 @@ if (!$task) {
                 <?= nl2br(htmlspecialchars($task->getDescription())); ?>
             </p>
 
-            <p><strong><?= __t('global.status') ?> :</strong> <?= htmlspecialchars(\Tasks\Task::STATUS[$task->getStatus()] ?? $task->getStatus()); ?></p>
-            <p><strong><?= __t('global.priority') ?> :</strong> <?= htmlspecialchars(\Tasks\Task::PRIORITIES[$task->getPriority()] ?? $task->getPriority()); ?></p>
+            <p><strong><?= __t('global.status') ?> :</strong> <?= htmlspecialchars($task->getTranslatedStatus()); ?></p>
+            <p><strong><?= __t('global.priority') ?> :</strong> <?= htmlspecialchars($task->getTranslatedPriority()); ?></p>
             <p><strong><?= __t('global.date') ?> :</strong> <?= htmlspecialchars($task->getEndDate()->format('d/m/Y')); ?></p>
-            <p><strong><?= __t('global.category') ?> :</strong> <?= htmlspecialchars(\Tasks\Task::CATEGORIES[$task->getCategory()] ?? $task->getCategory()); ?></p>
+            <p><strong><?= __t('global.category') ?> :</strong> <?= htmlspecialchars($task->getTranslatedCategory()); ?></p>
         </article>
 
-        <footer style="margin-top: 2em;">
+        <footer>
             <a href="edit.php?id=<?= $task->getId(); ?>" role="button"><?= __t('global.modify_task') ?></a>
             <a href="delete.php?id=<?= $task->getId(); ?>" role="button" class="secondary" onclick="return confirm('<?= __t('global.confirm_delete') ?>');">
                 <?= __t('global.delete_task') ?>

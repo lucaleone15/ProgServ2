@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= __t('edit.title') ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
 </head>
 
 <body>
@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <label for="status"><?= __t('global.status') ?></label>
             <select id="status" name="status" required>
-                <?php foreach (Task::STATUS as $key => $value) { ?>
+                <?php foreach (Task::getTranslatedStatuses() as $key => $value) { ?>
                     <option value="<?= $key ?>" <?= (($task->getStatus() === $key) ? "selected" : "") ?>>
                         <?= htmlspecialchars($value) ?>
                     </option>
@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <label for="priority"><?= __t('global.priority') ?></label>
             <select id="priority" name="priority" required>
-                <?php foreach (Task::PRIORITIES as $key => $value) { ?>
+                <?php foreach (Task::getTranslatedPriorities() as $key => $value) { ?>
                     <option value="<?= $key ?>" <?= (($task->getPriority() === $key) ? "selected" : "") ?>>
                         <?= htmlspecialchars($value) ?>
                     </option>
@@ -116,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <label for="category"><?= __t('global.category') ?></label>
             <select id="category" name="category" required>
-                <?php foreach (Task::CATEGORIES as $key => $value) { ?>
+                <?php foreach (Task::getTranslatedCategories() as $key => $value) { ?>
                     <option value="<?= $key ?>" <?= (($task->getCategory() === $key) ? "selected" : "") ?>>
                         <?= htmlspecialchars($value) ?>
                     </option>
