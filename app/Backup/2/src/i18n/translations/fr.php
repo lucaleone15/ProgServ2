@@ -122,6 +122,52 @@ return [
         'invalid_category' => 'La catégorie de la tâche est invalide.',
     ],
 
+    // login.php
+    'login' => [
+        'error_mandatory' => 'Tous les champs sont obligatoires.',
+        'error_incorrect' => 'Nom d’utilisateur ou mot de passe incorrect.',
+        'error_connect' => 'Erreur lors de la connexion : ',
+        'title' => 'Se connecter | Gestion des sessions',
+        'h1' => 'Se connecter',
+        'error' => 'Erreur :',
+        'username' => 'Nom d’utilisateur',
+        'password' => 'Mot de passe',
+        'submit' => 'Se connecter',
+        'not_connected' => 'Pas encore de compte ? ',
+        'create_account' => 'Créer un compte',
+        'return_home' => 'Retour à l’accueil',
+    ],
+
+    // logout.php
+    'logout' => [
+        'title' => 'Déconnexion | Gestion des sessions',
+        'h1' => 'Déconnexion réussie',
+        'p' => 'Vous avez été déconnecté(e) avec succès.',
+        'return_home' => 'Retour à l’accueil',
+        'connect' => 'Se connecter à nouveau',
+    ],
+
+    // register.php
+    'register' => [
+        'error_mandatory' => 'Tous les champs sont obligatoires.',
+        'error_incorrect' => 'Les mots de passe ne correspondent pas.',
+        'error_password_length' => 'Le mot de passe doit contenir au moins 8 caractères.',
+        'error_taken' => 'Ce nom d’utilisateur est déjà pris.',
+        'success_creation' => 'Compte créé avec succès ! Vous pouvez maintenant vous connecter.',
+        'error_creation' => 'Erreur lors de la création du compte : ',
+        'title' => 'Créer un compte | Gestion des sessions',
+        'h1' => 'Créer un compte',
+        'error' => 'Erreur :',
+        'success' => 'Succès :',
+        'connect' => 'Se connecter maintenant',
+        'username' => 'Nom d’utilisateur',
+        'password' => 'Mot de passe (min. 8 caractères)',
+        'confirm_password' => 'Confirmer le mot de passe',
+        'submit' => 'Créer mon compte',
+        'to_login' => 'Vous avez déjà un compte ? ',
+        'return_home' => 'Retour à l’accueil',
+    ],
+
     // DATABASE ERRORS
     'database' => [
         'error' => 'Erreur lors de la lecture du fichier de configuration : ',

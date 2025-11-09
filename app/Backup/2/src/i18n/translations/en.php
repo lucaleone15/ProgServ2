@@ -122,6 +122,52 @@ return [
         'invalid_category' => 'Task category is invalid.',
     ],
 
+    // login.php
+    'login' => [
+        'error_mandatory' => 'All fields are required.',
+        'error_incorrect' => 'Incorrect username or password.',
+        'error_connect' => 'Connection error: ',
+        'title' => 'Login | Session Management',
+        'h1' => 'Login',
+        'error' => 'Error:',
+        'username' => 'Username',
+        'password' => 'Password',
+        'submit' => 'Log in',
+        'not_connected' => 'Don’t have an account yet? ',
+        'create_account' => 'Create an account',
+        'return_home' => 'Back to home',
+    ],
+
+    // logout.php
+    'logout' => [
+        'title' => 'Logout | Session Management',
+        'h1' => 'Logout Successful',
+        'p' => 'You have been successfully logged out.',
+        'return_home' => 'Back to home',
+        'connect' => 'Log in again',
+    ],
+
+    // register.php
+    'register' => [
+        'error_mandatory' => 'All fields are required.',
+        'error_incorrect' => 'Passwords do not match.',
+        'error_password_length' => 'The password must be at least 8 characters long.',
+        'error_taken' => 'This username is already taken.',
+        'success_creation' => 'Account successfully created! You can now log in.',
+        'error_creation' => 'Error creating account: ',
+        'title' => 'Create an Account | Session Management',
+        'h1' => 'Create an Account',
+        'error' => 'Error:',
+        'success' => 'Success:',
+        'connect' => 'Log in now',
+        'username' => 'Username',
+        'password' => 'Password (min. 8 characters)',
+        'confirm_password' => 'Confirm Password',
+        'submit' => 'Create my account',
+        'to_login' => 'Already have an account? ',
+        'return_home' => 'Back to home',
+    ],
+
     // DATABASE ERRORS
     'database' => [
         'error' => 'Error reading configuration file: ',
