@@ -75,7 +75,7 @@ if (!$task) {
         <!-- Informations utilisateur -->
         <div class="user-info">
             <?= __t('home.logged_in_as') ?> <strong><?= htmlspecialchars($username) ?></strong> —
-            <a href="../auth/logout.php"><?= __t('logout.connect') ?></a>
+            <a href="../auth/logout.php"><?= __t('logout.logout') ?></a>
         </div>
 
         <h1><?= __t('view.h1') ?></h1>
