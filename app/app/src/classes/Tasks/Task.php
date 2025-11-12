@@ -29,9 +29,9 @@ class Task {
 
     const CATEGORIES = [
         'work' => 'tasks.category.work',
-        'personal' => 'tasks.category.personal',
-        'shopping' => 'tasks.category.shopping',
-        'other' => 'tasks.category.other'
+        'school' => 'tasks.category.school',
+        'hobby' => 'tasks.category.hobby',
+        'personal' => 'tasks.category.personal'
     ];
 
     public function __construct(

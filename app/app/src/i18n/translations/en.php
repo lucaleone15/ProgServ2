@@ -103,9 +103,9 @@ return [
         ],
         'category' => [
             'work' => 'Work',
+            'school' => 'School',
+            'hobby' => 'Hobby',
             'personal' => 'Personal',
-            'shopping' => 'Shopping',
-            'other' => 'Other',
         ],
         'error' => [
             'empty_name' => 'Task name cannot be empty',
@@ -114,28 +114,6 @@ return [
             'invalid_priority' => 'Invalid priority',
             'invalid_category' => 'Invalid category',
         ],
-    ],
-
-    // TASK STATUS (old structure - kept for compatibility)
-    'task_status' => [
-        'to_do' => 'To do',
-        'in_progress' => 'In progress',
-        'completed' => 'Completed',
-    ],
-
-    // TASK PRIORITIES (old structure - kept for compatibility)
-    'task_priority' => [
-        'low' => 'Low',
-        'normal' => 'Normal',
-        'high' => 'High',
-    ],
-
-    // TASK CATEGORIES (old structure - kept for compatibility)
-    'task_category' => [
-        'work' => 'Work',
-        'school' => 'School',
-        'hobby' => 'Hobby',
-        'personal' => 'Personal',
     ],
 
     // TASK CONSTRUCT ERRORS

@@ -103,9 +103,9 @@ return [
         ],
         'category' => [
             'work' => 'Travail',
+            'school' => 'Études',
+            'hobby' => 'Loisir',
             'personal' => 'Personnel',
-            'shopping' => 'Courses',
-            'other' => 'Autre',
         ],
         'error' => [
             'empty_name' => 'Le nom de la tâche ne peut pas être vide',
@@ -114,28 +114,6 @@ return [
             'invalid_priority' => 'Priorité invalide',
             'invalid_category' => 'Catégorie invalide',
         ],
-    ],
-
-    // TASK STATUS (ancienne structure - maintenue pour compatibilité)
-    'task_status' => [
-        'to_do' => 'À faire',
-        'in_progress' => 'En cours',
-        'completed' => 'Terminé',
-    ],
-
-    // TASK PRIORITIES (ancienne structure - maintenue pour compatibilité)
-    'task_priority' => [
-        'low' => 'Faible',
-        'normal' => 'Normal',
-        'high' => 'Élevé',
-    ],
-
-    // TASK CATEGORIES (ancienne structure - maintenue pour compatibilité)
-    'task_category' => [
-        'work' => 'Travail',
-        'school' => 'Études',
-        'hobby' => 'Loisir',
-        'personal' => 'Personnel',
     ],
 
     // TASK CONSTRUCT ERRORS
