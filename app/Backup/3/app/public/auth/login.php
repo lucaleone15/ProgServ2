@@ -18,31 +18,21 @@ $error = '';
 
 // Traite le formulaire de connexion
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $identifier = trim($_POST['identifier'] ?? ''); // Peut être username ou email
+    $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
 
     // Validation des données
-    if (empty($identifier) || empty($password)) {
+    if (empty($username) || empty($password)) {
         $error = __t('login.error_mandatory');
     } else {
         try {
             $userManager = new UserManager();
-            
-            // Tente l'authentification par username ou email
-            $user = null;
-            
-            // Si l'identifiant contient un @, c'est probablement un email
-            if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
-                $user = $userManager->authenticateByEmail($identifier, $password);
-            } else {
-                $user = $userManager->authenticate($identifier, $password);
-            }
+            $user = $userManager->authenticate($username, $password);
 
             if ($user) {
                 // Authentification réussie
                 $_SESSION['user_id'] = $user->getId();
                 $_SESSION['username'] = $user->getUsername();
-                $_SESSION['email'] = $user->getEmail();
                 $_SESSION['role'] = $user->getRole();
 
                 // Redirection vers la page d'origine ou l'accueil
@@ -66,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/digitallytailored/classless.css/classless.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
     <title><?= __t('login.title') ?></title>
 </head>
@@ -82,11 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <form method="post">
-            <label for="identifier">
-                <?= __t('login.identifier') ?>
-                <input type="text" id="identifier" name="identifier" 
-                       value="<?= htmlspecialchars($identifier ?? '') ?>" 
-                       placeholder="<?= __t('login.identifier_placeholder') ?>"
+            <label for="username">
+                <?= __t('login.username') ?>
+                <input type="text" id="username" name="username" 
+                       value="<?= htmlspecialchars($username ?? '') ?>" 
                        required autofocus>
             </label>
 

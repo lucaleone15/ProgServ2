@@ -14,7 +14,7 @@ $username = $_SESSION['username'] ?? null;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/digitallytailored/classless.css/classless.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="css/custom.css">
 
     <title><?= __t('home.title') ?></title>
@@ -57,11 +57,7 @@ $username = $_SESSION['username'] ?? null;
             </select>
         </form>
 
-        <section style="margin-top:1.5rem;">
-            <h2><?= __t('home.description_title') ?></h2>
-            <p><?= __t('home.description') ?></p>
-        </section>
-
+        <p><?= __t('home.welcome') ?></p>
 
         <p>
             <a href="tasks/index.php">

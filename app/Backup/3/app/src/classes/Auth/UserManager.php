@@ -14,12 +14,11 @@ class UserManager {
     }
 
     public function createUser(User $user): int {
-        $sql = "INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password, :role)";
+        $sql = "INSERT INTO users (username, password, role) VALUES (:username, :password, :role)";
         $stmt = $this->pdo->prepare($sql);
         
         $stmt->execute([
             'username' => $user->getUsername(),
-            'email' => $user->getEmail(),
             'password' => $user->getPassword(),
             'role' => $user->getRole()
         ]);
@@ -41,27 +40,6 @@ class UserManager {
         return new User(
             $data['id'],
             $data['username'],
-            $data['email'],
-            $data['password'],
-            $data['role']
-        );
-    }
-
-    public function getUserByEmail(string $email): ?User {
-        $sql = "SELECT * FROM users WHERE email = :email";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(['email' => $email]);
-        
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        if (!$data) {
-            return null;
-        }
-
-        return new User(
-            $data['id'],
-            $data['username'],
-            $data['email'],
             $data['password'],
             $data['role']
         );
@@ -81,7 +59,6 @@ class UserManager {
         return new User(
             $data['id'],
             $data['username'],
-            $data['email'],
             $data['password'],
             $data['role']
         );
@@ -91,14 +68,6 @@ class UserManager {
         $sql = "SELECT COUNT(*) FROM users WHERE username = :username";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['username' => $username]);
-        
-        return $stmt->fetchColumn() > 0;
-    }
-
-    public function emailExists(string $email): bool {
-        $sql = "SELECT COUNT(*) FROM users WHERE email = :email";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(['email' => $email]);
         
         return $stmt->fetchColumn() > 0;
     }
@@ -117,28 +86,13 @@ class UserManager {
         return null;
     }
 
-    public function authenticateByEmail(string $email, string $password): ?User {
-        $user = $this->getUserByEmail($email);
-        
-        if (!$user) {
-            return null;
-        }
-
-        if ($user->verifyPassword($password)) {
-            return $user;
-        }
-
-        return null;
-    }
-
     public function updateUser(int $id, User $user): bool {
-        $sql = "UPDATE users SET username = :username, email = :email, role = :role WHERE id = :id";
+        $sql = "UPDATE users SET username = :username, role = :role WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         
         return $stmt->execute([
             'id' => $id,
             'username' => $user->getUsername(),
-            'email' => $user->getEmail(),
             'role' => $user->getRole()
         ]);
     }
@@ -159,7 +113,6 @@ class UserManager {
             $users[] = new User(
                 $data['id'],
                 $data['username'],
-                $data['email'],
                 $data['password'],
                 $data['role']
             );

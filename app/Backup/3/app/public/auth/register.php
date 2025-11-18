@@ -4,11 +4,6 @@ require __DIR__ . '/../../src/i18n/load-translation.php';
 
 use Auth\UserManager;
 use Auth\User;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-// Constante pour le fichier de configuration mail
-define('MAIL_CONFIGURATION_FILE', __DIR__ . '/../../src/config/mail.ini');
 
 // Démarre la session
 session_start();
@@ -26,12 +21,11 @@ $success = '';
 // Traiter le formulaire d'inscription
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
-    $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
     $confirmPassword = $_POST['confirm_password'] ?? '';
 
     // Validation des données
-    if (empty($username) || empty($email) || empty($password) || empty($confirmPassword)) {
+    if (empty($username) || empty($password) || empty($confirmPassword)) {
         $error = __t('register.error_mandatory');
     } elseif ($password !== $confirmPassword) {
         $error = __t('register.error_incorrect');
@@ -44,62 +38,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Vérifier si l'utilisateur existe déjà
             if ($userManager->usernameExists($username)) {
                 $error = __t('register.error_taken');
-            } elseif ($userManager->emailExists($email)) {
-                $error = __t('register.error_email_taken');
             } else {
                 // Créer le nouvel utilisateur
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                $user = new User(null, $username, $email, $hashedPassword, 'user');
+                $user = new User(null, $username, $hashedPassword, 'user');
                 
                 $userId = $userManager->createUser($user);
 
                 if ($userId) {
-                    // Envoi de l'email de bienvenue
-                    $emailSent = false;
-                    try {
-                        $config = parse_ini_file(MAIL_CONFIGURATION_FILE, true);
-                        
-                        if ($config) {
-                            $host = $config['host'];
-                            $port = filter_var($config['port'], FILTER_VALIDATE_INT);
-                            $authentication = filter_var($config['authentication'], FILTER_VALIDATE_BOOLEAN);
-                            $mail_username = $config['username'];
-                            $mail_password = $config['password'];
-                            $from_email = $config['from_email'];
-                            $from_name = $config['from_name'];
-                            
-                            $mail = new PHPMailer(true);
-                            $mail->isSMTP();
-                            $mail->Host = $host;
-                            $mail->Port = $port;
-                            $mail->SMTPAuth = $authentication;
-                            $mail->Username = $mail_username;
-                            $mail->Password = $mail_password;
-                            $mail->CharSet = "UTF-8";
-                            $mail->Encoding = "base64";
-                            
-                            // Expéditeur et destinataire
-                            $mail->setFrom($from_email, $from_name);
-                            $mail->addAddress($email, $username);
-                            
-                            // Contenu du mail
-                            $mail->isHTML(true);
-                            $mail->Subject = __t('register.email_subject');
-                            $mail->Body = sprintf(__t('register.email_body_html'), htmlspecialchars($username));
-                            $mail->AltBody = sprintf(__t('register.email_body_text'), $username);
-                            
-                            $mail->send();
-                            $emailSent = true;
-                        }
-                    } catch (Exception $e) {
-                        error_log("Erreur d'envoi d'email : {$e->getMessage()}");
-                    }
-                    
-                    if ($emailSent) {
-                        $success = __t('register.success_creation_with_email');
-                    } else {
-                        $success = __t('register.success_creation');
-                    }
+                    $success = __t('register.success_creation');
                 } else {
                     $error = __t('register.error_creation');
                 }
@@ -120,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/digitallytailored/classless.css/classless.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
     <title><?= __t('register.title') ?></title>
 </head>
@@ -147,13 +94,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="text" id="username" name="username" 
                            value="<?= htmlspecialchars($username ?? '') ?>" 
                            required autofocus minlength="3" maxlength="50">
-                </label>
-
-                <label for="email">
-                    <?= __t('register.email') ?>
-                    <input type="email" id="email" name="email" 
-                           value="<?= htmlspecialchars($email ?? '') ?>" 
-                           required maxlength="255">
                 </label>
 
                 <label for="password">

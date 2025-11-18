@@ -20,15 +20,13 @@ return [
 
     // HOME PAGE
     'home' => [
-        'title' => 'Accueil',
-        'h1' => 'Bienvenue sur TaskBoard',
-        'description_title' => 'TaskBoard – Votre organisation simplifiée',
-        'description' => 'TaskBoard est une application web de gestion de tâches pensée pour vous aider à rester organisé et à collaborer facilement avec d’autres personnes. Créez vos projets, planifiez vos activités, suivez vos priorités et travaillez en équipe, où que vous soyez.',
-        'index_btn' => 'Accéder à mes tâches',
+        'title' => 'Page d\'accueil | TaskBoard',
+        'h1' => 'Page d\'accueil',
+        'welcome' => 'Bienvenue sur la page d\'accueil de TaskBoard.',
+        'index_btn' => 'Aller à la gestion des tâches',
         'logged_in_as' => 'Connecté en tant que',
         'user_logout' => 'Se déconnecter',
     ],
-    
 
     // TASK LIST PAGE (INDEX)
     'index' => [
@@ -146,8 +144,6 @@ return [
         'not_connected' => 'Pas encore de compte ? ',
         'create_account' => 'Créer un compte',
         'return_home' => 'Retour à l\'accueil',
-        'identifier' => 'Nom d\'utilisateur ou Email',
-        'identifier_placeholder' => 'nom d\'utilisateur / email@exemple.com',
     ],
 
     // LOGOUT
@@ -179,12 +175,6 @@ return [
         'submit' => 'Créer mon compte',
         'to_login' => 'Vous avez déjà un compte ? ',
         'return_home' => 'Retour à l\'accueil',
-        'email' => 'Email',
-        'error_email_taken' => 'Cet email est déjà utilisé',
-        'success_creation_with_email' => 'Compte créé avec succès ! Un email de confirmation vous a été envoyé.',
-        'email_subject' => 'Bienvenue !',
-        'email_body_html' => '<h1>Bienvenue %s !</h1><p>Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter.</p>',
-        'email_body_text' => 'Bienvenue %s ! Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter.',
     ],
 
     // DATABASE ERRORS
@@ -198,8 +188,5 @@ return [
         'error_username_length' => 'Le nom d\'utilisateur doit contenir entre 3 et 50 caractères',
         'error_password_length' => 'Le mot de passe doit contenir au moins 8 caractères',
         'error_invalid_role' => 'Rôle invalide',
-        'error_empty_email' => 'Veuillez saisir une adresse e-mail.',
-        'error_invalid_email' => 'L’adresse e-mail saisie n’est pas valide.',
-        'error_email_length' => 'L’adresse e-mail dépasse la longueur autorisée.',
     ],
 ];

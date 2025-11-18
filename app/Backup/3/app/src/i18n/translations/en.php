@@ -20,15 +20,13 @@ return [
 
     // HOME PAGE
     'home' => [
-        'title' => 'Home',
-        'h1' => 'Welcome to TaskBoard',
-        'description_title' => 'TaskBoard – Simplify your organization',
-        'description' => 'TaskBoard is a web task management application designed to help you stay organized and collaborate easily with others. Create your projects, plan activities, track priorities and work as a team wherever you are.',
-        'index_btn' => 'Go to my tasks',
+        'title' => 'Home Page | TaskBoard',
+        'h1' => 'Home Page',
+        'welcome' => 'Welcome to the TaskBoard home page.',
+        'index_btn' => 'Go to task management',
         'logged_in_as' => 'Logged in as',
         'user_logout' => 'Logout',
     ],
-    
 
     // TASK LIST PAGE (INDEX)
     'index' => [
@@ -91,7 +89,7 @@ return [
         'submit' => 'Change language',
     ],
 
-    // TASKS - Status, Priority, Category
+    // TASKS - Status, Priority, Category with new keys
     'tasks' => [
         'status' => [
             'todo' => 'To do',
@@ -146,8 +144,6 @@ return [
         'not_connected' => 'Don\'t have an account yet? ',
         'create_account' => 'Create an account',
         'return_home' => 'Back to home',
-        'identifier' => 'Username or Email',
-        'identifier_placeholder' => 'username / email@example.com',
     ],
 
     // LOGOUT
@@ -179,12 +175,6 @@ return [
         'submit' => 'Create my account',
         'to_login' => 'Already have an account? ',
         'return_home' => 'Back to home',
-        'email' => 'Email',
-        'error_email_taken' => 'This email is already in use',
-        'success_creation_with_email' => 'Account created successfully! A confirmation email has been sent to you.',
-        'email_subject' => 'Welcome!',
-        'email_body_html' => '<h1>Welcome %s!</h1><p>Your account has been successfully created. You can now log in.</p>',
-        'email_body_text' => 'Welcome %s! Your account has been successfully created. You can now log in.',
     ],
 
     // DATABASE ERRORS
@@ -198,8 +188,5 @@ return [
         'error_username_length' => 'Username must be between 3 and 50 characters',
         'error_password_length' => 'Password must be at least 8 characters',
         'error_invalid_role' => 'Invalid role',
-        'error_empty_email' => 'Please enter an email address.',
-        'error_invalid_email' => 'The provided email address is not valid.',
-        'error_email_length' => 'The email address exceeds the allowed length.',
     ],
 ];
