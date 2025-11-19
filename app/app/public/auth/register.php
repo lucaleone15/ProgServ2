@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // Constante pour le fichier de configuration mail
-define('MAIL_CONFIGURATION_FILE', __DIR__ . '/../../src/config/mail.ini');
+const MAIL_CONFIGURATION_FILE = __DIR__ . '/../../src/config/mail.ini';
 
 // Démarre la session
 session_start();
@@ -33,6 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validation des données
     if (empty($username) || empty($email) || empty($password) || empty($confirmPassword)) {
         $error = __t('register.error_mandatory');
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Le format de l'email est invalide.";
     } elseif ($password !== $confirmPassword) {
         $error = __t('register.error_incorrect');
     } elseif (strlen($password) < 8) {
@@ -59,42 +61,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     try {
                         $config = parse_ini_file(MAIL_CONFIGURATION_FILE, true);
                         
-                        if ($config) {
-                            $host = $config['host'];
-                            $port = filter_var($config['port'], FILTER_VALIDATE_INT);
-                            $authentication = filter_var($config['authentication'], FILTER_VALIDATE_BOOLEAN);
-                            $mail_username = $config['username'];
-                            $mail_password = $config['password'];
-                            $from_email = $config['from_email'];
-                            $from_name = $config['from_name'];
-                            
-                            $mail = new PHPMailer(true);
-                            $mail->isSMTP();
-                            $mail->Host = $host;
-                            $mail->Port = $port;
-                            $mail->SMTPAuth = $authentication;
+                        if (!$config) {
+                            throw new Exception("Erreur lors de la lecture du fichier de configuration : " . MAIL_CONFIGURATION_FILE);
+                        }
+
+                        $host = $config['host'];
+                        $port = filter_var($config['port'], FILTER_VALIDATE_INT);
+                        $authentication = filter_var($config['authentication'], FILTER_VALIDATE_BOOLEAN);
+                        $mail_username = $config['username'];
+                        $mail_password = $config['password'];
+                        $from_email = $config['from_email'];
+                        $from_name = $config['from_name'];
+
+                        $mail = new PHPMailer(true);
+                        $mail->isSMTP();
+                        $mail->Host = $host;
+                        $mail->Port = $port;
+                        $mail->SMTPAuth = $authentication;
+                        
+                        // Ne définir username/password que si l'authentification est activée
+                        if ($authentication) {
                             $mail->Username = $mail_username;
                             $mail->Password = $mail_password;
-                            $mail->CharSet = "UTF-8";
-                            $mail->Encoding = "base64";
-                            
-                            // Expéditeur et destinataire
-                            $mail->setFrom($from_email, $from_name);
-                            $mail->addAddress($email, $username);
-                            
-                            // Contenu du mail
-                            $mail->isHTML(true);
-                            $mail->Subject = __t('register.email_subject');
-                            $mail->Body = sprintf(__t('register.email_body_html'), htmlspecialchars($username));
-                            $mail->AltBody = sprintf(__t('register.email_body_text'), $username);
-                            
-                            $mail->send();
-                            $emailSent = true;
                         }
+                        
+                        // Configuration du chiffrement selon le port
+                        if ($port == 465) {
+                            // Port 465 : SSL direct (SMTPS)
+                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                        } else if ($port == 587) {
+                            // Port 587 : STARTTLS
+                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                        }
+                        // Pour les ports locaux (1025, 1080, etc.) : pas de chiffrement
+                        
+                        $mail->CharSet = "UTF-8";
+                        $mail->Encoding = "base64";
+
+                        // Expéditeur et destinataire
+                        $mail->setFrom($from_email, $from_name);
+                        $mail->addAddress($email, $username);
+
+                        // Contenu du mail
+                        $mail->isHTML(true);
+                        $mail->Subject = __t('register.email_subject');
+                        $mail->Body = sprintf(__t('register.email_body_html'), htmlspecialchars($username));
+                        $mail->AltBody = sprintf(__t('register.email_body_text'), $username);
+
+                        $mail->send();
+                        $emailSent = true;
                     } catch (Exception $e) {
                         error_log("Erreur d'envoi d'email : {$e->getMessage()}");
                     }
-                    
+
                     if ($emailSent) {
                         $success = __t('register.success_creation_with_email');
                     } else {
@@ -130,15 +149,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1><?= __t('register.h1') ?></h1>
 
         <?php if ($error): ?>
-            <article style="background-color: var(--pico-del-color);">
+            <article style="background-color: var(--pico-del-color); padding: 1rem; margin: 1rem 0;">
                 <p><strong><?= __t('register.error') ?></strong> <?= htmlspecialchars($error) ?></p>
             </article>
         <?php endif; ?>
 
         <?php if ($success): ?>
-            <article style="background-color: var(--pico-ins-color);">
+            <article style="background-color: var(--pico-ins-color); padding: 1rem; margin: 1rem 0;">
                 <p><strong><?= __t('register.success') ?></strong> <?= htmlspecialchars($success) ?></p>
-                <p><a href="login.php"><?= __t('register.connect') ?></a></p>
+                <p><a href="login.php" style="font-weight: bold;"><?= __t('register.connect') ?></a></p>
             </article>
         <?php else: ?>
             <form method="post">
@@ -146,26 +165,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?= __t('register.username') ?>
                     <input type="text" id="username" name="username" 
                            value="<?= htmlspecialchars($username ?? '') ?>" 
-                           required autofocus minlength="3" maxlength="50">
+                           required autofocus minlength="3" maxlength="50"
+                           placeholder="Nom d'utilisateur">
                 </label>
 
                 <label for="email">
                     <?= __t('register.email') ?>
                     <input type="email" id="email" name="email" 
                            value="<?= htmlspecialchars($email ?? '') ?>" 
-                           required maxlength="255">
+                           required maxlength="255"
+                           placeholder="exemple@email.com">
                 </label>
 
                 <label for="password">
                     <?= __t('register.password') ?>
                     <input type="password" id="password" name="password" 
-                           required minlength="8">
+                           required minlength="8"
+                           placeholder="Minimum 8 caractères">
                 </label>
 
                 <label for="confirm_password">
                     <?= __t('register.confirm_password') ?>
                     <input type="password" id="confirm_password" name="confirm_password" 
-                           required minlength="8">
+                           required minlength="8"
+                           placeholder="Confirmez votre mot de passe">
                 </label>
 
                 <button type="submit"><?= __t('register.submit') ?></button>
