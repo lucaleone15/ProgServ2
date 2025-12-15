@@ -363,14 +363,14 @@ foreach ($allTasks as $task) {
             <div>
                 <strong><?= htmlspecialchars($username) ?></strong>
                 <?php if ($userRole === 'admin'): ?>
-                    <span>(Admin)</span>
+                    <span>(<?= __t('kanban.admin') ?>)</span>
                 <?php endif; ?>
             </div>
             <div style="display: flex; gap: 1rem;">
                 <?php if ($userRole === 'admin'): ?>
-                    <a href="../admin/users.php">🛡️ Gestion utilisateurs</a>
+                    <a href="../admin/users.php">🛡️ <?= __t('kanban.manage_users') ?></a>
                 <?php endif; ?>
-                <a href="../auth/logout.php">Déconnexion</a>
+                <a href="../auth/logout.php"><?= __t('logout.logout') ?></a>
             </div>
         </div>
 
@@ -379,20 +379,20 @@ foreach ($allTasks as $task) {
             <div>
                 <h1 style="margin: 0;"><?= __t('index.h1') ?></h1>
                 <p style="margin: 0.5rem 0 0 0; color: var(--pico-muted-color);">
-                    <?= count($allTasks) ?> tâche(s) au total
+                    <?= count($allTasks) ?> <?= __t('kanban.tasks_total') ?>
                 </p>
             </div>
             <div style="display: flex; gap: 1rem; align-items: center;">
                 <div class="view-toggle">
                     <button class="active" onclick="switchView('kanban')" id="btn-kanban">
-                        📊 Kanban
+                        📊 <?= __t('kanban.view_kanban') ?>
                     </button>
                     <button onclick="switchView('list')" id="btn-list">
-                        📋 Liste
+                        📋 <?= __t('kanban.view_list') ?>
                     </button>
                 </div>
                 <a href="create.php">
-                    <button type="button">➕ Nouvelle tâche</button>
+                    <button type="button">➕ <?= __t('kanban.new_task') ?></button>
                 </a>
             </div>
         </div>
@@ -404,13 +404,13 @@ foreach ($allTasks as $task) {
                 <div class="kanban-column column-todo">
                     <div class="kanban-column-header">
                         <div class="kanban-column-title">
-                            📝 À faire
+                            📝 <?= __t('tasks.status.todo') ?>
                         </div>
                         <div class="kanban-column-count"><?= count($tasksByStatus['todo']) ?></div>
                     </div>
                     <div class="kanban-cards">
                         <?php if (empty($tasksByStatus['todo'])): ?>
-                            <div class="empty-state">Aucune tâche</div>
+                            <div class="empty-state"><?= __t('kanban.no_tasks') ?></div>
                         <?php else: ?>
                             <?php foreach ($tasksByStatus['todo'] as $task): ?>
                                 <?php include 'task-card.php'; ?>
@@ -423,13 +423,13 @@ foreach ($allTasks as $task) {
                 <div class="kanban-column column-in-progress">
                     <div class="kanban-column-header">
                         <div class="kanban-column-title">
-                            ⚡ En cours
+                            ⚡ <?= __t('tasks.status.in_progress') ?>
                         </div>
                         <div class="kanban-column-count"><?= count($tasksByStatus['in_progress']) ?></div>
                     </div>
                     <div class="kanban-cards">
                         <?php if (empty($tasksByStatus['in_progress'])): ?>
-                            <div class="empty-state">Aucune tâche</div>
+                            <div class="empty-state"><?= __t('kanban.no_tasks') ?></div>
                         <?php else: ?>
                             <?php foreach ($tasksByStatus['in_progress'] as $task): ?>
                                 <?php include 'task-card.php'; ?>
@@ -442,13 +442,13 @@ foreach ($allTasks as $task) {
                 <div class="kanban-column column-done">
                     <div class="kanban-column-header">
                         <div class="kanban-column-title">
-                            ✅ Terminé
+                            ✅ <?= __t('tasks.status.done') ?>
                         </div>
                         <div class="kanban-column-count"><?= count($tasksByStatus['done']) ?></div>
                     </div>
                     <div class="kanban-cards">
                         <?php if (empty($tasksByStatus['done'])): ?>
-                            <div class="empty-state">Aucune tâche</div>
+                            <div class="empty-state"><?= __t('kanban.no_tasks') ?></div>
                         <?php else: ?>
                             <?php foreach ($tasksByStatus['done'] as $task): ?>
                                 <?php include 'task-card.php'; ?>
@@ -541,12 +541,12 @@ foreach ($allTasks as $task) {
                     if (data.success) {
                         location.reload();
                     } else {
-                        alert('Erreur lors du changement de statut');
+                        alert('<?= __t('kanban.error_status_change') ?>');
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Erreur de connexion');
+                    alert('<?= __t('kanban.error_connection') ?>');
                 });
         }
     </script>

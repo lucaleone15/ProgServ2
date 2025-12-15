@@ -1,6 +1,5 @@
 <?php
 // Ce fichier est inclus dans index.php, donc Task est déjà disponible
-// Mais on peut le redéclarer pour éviter les erreurs IDE
 use Tasks\Task;
 ?>
 <div class="task-card priority-<?= htmlspecialchars($task->getPriority()) ?>" onclick="window.location.href='view.php?id=<?= $task->getId() ?>'">
@@ -39,7 +38,7 @@ use Tasks\Task;
 
     <div class="task-card-actions" onclick="event.stopPropagation()">
         <select onchange="changeStatus(<?= $task->getId() ?>, this)">
-            <option value="">Changer statut...</option>
+            <option value=""><?= __t('kanban.change_status') ?></option>
             <?php
             $statuses = [
                 'todo' => __t('tasks.status.todo'),
@@ -54,10 +53,10 @@ use Tasks\Task;
             <?php endforeach; ?>
         </select>
 
-        <a href="edit.php?id=<?= $task->getId() ?>" title="Modifier">✏️</a>
+        <a href="edit.php?id=<?= $task->getId() ?>" title="<?= __t('global.modify_task') ?>">✏️</a>
         <a href="delete.php?id=<?= $task->getId() ?>"
-            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')"
-            title="Supprimer"
+            onclick="return confirm('<?= __t('global.confirm_delete') ?>')"
+            title="<?= __t('global.delete_task') ?>"
             style="color: #ef4444;">🗑️</a>
     </div>
 </div>

@@ -243,4 +243,17 @@ return [
         'user_deleted' => 'User deleted successfully',
     ],
 
+    // KANBAN
+    'kanban' => [
+        'admin' => 'Admin',
+        'manage_users' => 'Manage users',
+        'tasks_total' => 'task(s) total',
+        'view_kanban' => 'Kanban',
+        'view_list' => 'List',
+        'new_task' => 'New task',
+        'no_tasks' => 'No tasks',
+        'change_status' => 'Change status...',
+        'error_status_change' => 'Error changing status',
+        'error_connection' => 'Connection error',
+    ],
 ];

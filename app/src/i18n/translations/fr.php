@@ -243,4 +243,17 @@ return [
         'user_deleted' => 'Utilisateur supprimé avec succès',
     ],
 
+    // KANBAN
+    'kanban' => [
+        'admin' => 'Admin',
+        'manage_users' => 'Gestion utilisateurs',
+        'tasks_total' => 'tâche(s) au total',
+        'view_kanban' => 'Kanban',
+        'view_list' => 'Liste',
+        'new_task' => 'Nouvelle tâche',
+        'no_tasks' => 'Aucune tâche',
+        'change_status' => 'Changer statut...',
+        'error_status_change' => 'Erreur lors du changement de statut',
+        'error_connection' => 'Erreur de connexion',
+    ],
 ];
