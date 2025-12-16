@@ -20,26 +20,26 @@ Application web de gestion de tâches permettant aux utilisateurs de gérer leur
 
 ### Pages publiques
 
-- ✅ **Accueil** : Présentation du service avec logo et description
-- ✅ **Inscription** : Formulaire complet avec envoi d'email de confirmation (PHPMailer)
-- ✅ **Connexion** : Authentification par username ou email
+- **Accueil** : Présentation du service avec logo et description
+- **Inscription** : Formulaire complet avec envoi d'email de confirmation (PHPMailer)
+- **Connexion** : Authentification par username ou email
 
 ### Pages privées
 
-- ✅ **Tableau de bord Kanban** : Vue moderne en 3 colonnes (À faire, En cours, Terminé)
-- ✅ **Gestion des tâches** :
+- **Tableau de bord Kanban** : Vue moderne en 3 colonnes (À faire, En cours, Terminé)
+- **Gestion des tâches** :
     - Création, modification, suppression de tâches
     - Nom, description, statut, priorité, date limite
     - Association à une catégorie (Travail, Études, Loisirs, Personnel)
     - **Changement de statut rapide** directement depuis le Kanban
     - Vue alternative en liste/tableau
-- ✅ **Système d'authentification** : Sessions sécurisées, middleware de protection
-- ✅ **Multilingue** : Système de traduction complet (FR/EN) avec sélection dynamique
+- **Système d'authentification** : Sessions sécurisées, middleware de protection
+- **Multilingue** : Système de traduction complet (FR/EN) avec sélection dynamique
 
 ### Gestion des rôles
 
-- ✅ **Utilisateur standard** : Gère uniquement ses propres tâches
-- ✅ **Administrateur** :
+- **Utilisateur standard** : Gère uniquement ses propres tâches
+- **Administrateur** :
     - Page de gestion des utilisateurs
     - Changement de rôles
     - Suppression d'utilisateurs
@@ -47,15 +47,15 @@ Application web de gestion de tâches permettant aux utilisateurs de gérer leur
 
 ### Architecture technique
 
-- ✅ **Base de données** : MySQL/MariaDB avec relations (users, tasks)
-- ✅ **POO** : Classes Task, TasksManager, User, UserManager, Database
-- ✅ **Autoloader** : Chargement automatique des classes
-- ✅ **Sécurité** :
+- **Base de données** : MySQL/MariaDB avec relations (users, tasks)
+- **POO** : Classes Task, TasksManager, User, UserManager, Database
+- **Autoloader** : Chargement automatique des classes
+- **Sécurité** :
     - Hashage des mots de passe (password_hash)
     - Validation côté serveur
     - Échappement des sorties (htmlspecialchars)
     - Requêtes préparées (PDO)
-- ✅ **Design responsive** : Interface moderne avec CSS Classless
+- **Design responsive** : Interface moderne avec CSS Classless
 
 ---
 
@@ -67,46 +67,48 @@ Application web de gestion de tâches permettant aux utilisateurs de gérer leur
 taskboard/
 ├── public/
 │   ├── admin/
-│   │   ├── users.php              ✅ Gestion utilisateurs
-│   │   ├── create-admin.php       ✅ Création compte admin
+│   │   ├── users.php                       Gestion utilisateurs
+│   │   ├── create-admin.php                Création compte admin
 │   ├── assets/
 │   │   ├── css/
 │   │   └── img/
 │   ├── auth/
-│   │   ├── login.php              ✅ Connexion
-│   │   ├── register.php           ✅ Inscription
-│   │   └── logout.php             ✅ Déconnexion
+│   │   ├── login.php                       Connexion
+│   │   ├── register.php                    Inscription
+│   │   └── logout.php                      Déconnexion
 │   ├── tasks/
-│   │   ├── index.php              ✅ Vue Kanban/Liste
-│   │   ├── create.php             ✅ Création tâche
-│   │   ├── edit.php               ✅ Modification tâche
-│   │   ├── view.php               ✅ Détails tâche
-│   │   ├── delete.php             ✅ Suppression tâche
-│   │   └── task-card.php          ✅ Composant carte Kanban
-│   └── index.php                  ✅ Page d'accueil
+│   │   ├── index.php                       Vue Kanban/Liste
+│   │   ├── create.php                      Création tâche
+│   │   ├── edit.php                        Modification tâche
+│   │   ├── view.php                        Détails tâche
+│   │   ├── delete.php                      Suppression tâche
+│   │   └── task-card.php                   Composant carte Kanban
+│   └── index.php                           Page d'accueil
 ├── src/
 │   ├── auth/
-│   │   └── auth-middleware.php    ✅ Protection pages
+│   │   └── auth-middleware.php             Protection pages
 │   ├── classes/
 │   │   ├── Auth/
-│   │   │   ├── User.php           ✅ Modèle utilisateur
-│   │   │   ├── UserManager.php    ✅ Gestion CRUD users
+│   │   │   ├── User.php                    Modèle utilisateur
+│   │   │   ├── UserManager.php             Gestion CRUD users
 │   │   ├── PHPMailer/
 │   │   ├── Tasks/
-│   │   │   ├── Task.php           ✅ Modèle tâche
-│   │   │   └── TasksManager.php   ✅ Gestion CRUD tâches
-│   │   ├── Database.php           ✅ Connexion BDD
-│   │   └── DatabaseInterface.php  ✅ Interface
+│   │   │   ├── Task.php                    Modèle tâche
+│   │   │   ├── TaskInterface.php           Interface
+│   │   │   └── TasksManager.php            Gestion CRUD tâches
+│   │   │   └── TasksManagerInterface.php   Interface
+│   │   ├── Database.php                    Connexion BDD
+│   │   └── DatabaseInterface.php           Interface
 │   ├── config/
-│   │   ├── database.ini           ✅ Config BDD
-│   │   └── mail.ini               ✅ Config email
+│   │   ├── database.ini                    Config BDD
+│   │   └── mail.ini                        Config email
 │   ├── i18n/
 │   │   ├── Translations/
-│   │   │   ├── fr.php             ✅ Traductions FR
-│   │   │   ├── en.php             ✅ Traductions EN
-│   │   └── load-translation.php   ✅ Système i18n
+│   │   │   ├── fr.php                      Traductions FR
+│   │   │   ├── en.php                      Traductions EN
+│   │   └── load-translation.php            Système i18n
 │   └── utils/
-│       └── autoloader.php         ✅ Chargement classes
+│       └── autoloader.php                  Chargement classes
 
 ```
 
@@ -201,19 +203,19 @@ taskboard/
 
 Responsable de la logique métier, de la persistance des données et de la sécurité globale de l’application.
 
-- ✅ Conception et implémentation du **système de gestion des tâches (CRUD complet)**
-- ✅ Modélisation de la **base de données** et mise en place des relations (users ↔ tasks)
-- ✅ Mise en place de l’**architecture backend orientée objet**
-- ✅ Implémentation de l’**autoloader** et organisation du code via **namespaces**
-- ✅ Développement du **système d’authentification** (inscription, connexion, déconnexion)
-- ✅ Création des classes **User** et **UserManager**
-- ✅ Gestion des **sessions** et maintien de l’état connecté
-- ✅ Mise en place du **middleware d’authentification** pour la protection des pages privées
-- ✅ Gestion des **rôles utilisateurs** (utilisateur / administrateur)
-- ✅ Développement de la **page d’administration des utilisateurs**
-- ✅ Configuration de l’**envoi d’emails transactionnels** (confirmation de création de compte)
-- ✅ Développement de la **vue Kanban à 3 colonnes** (À faire / En cours / Terminé)
-- ✅ Développement du **système multilingue (FR / EN)** avec stockage de la langue dans un cookie
+- Conception et implémentation du **système de gestion des tâches (CRUD complet)**
+- Modélisation de la **base de données** et mise en place des relations (users ↔ tasks)
+- Mise en place de l’**architecture backend orientée objet**
+- Implémentation de l’**autoloader** et organisation du code via **namespaces**
+- Développement du **système d’authentification** (inscription, connexion, déconnexion)
+- Création des classes **User** et **UserManager**
+- Gestion des **sessions** et maintien de l’état connecté
+- Mise en place du **middleware d’authentification** pour la protection des pages privées
+- Gestion des **rôles utilisateurs** (utilisateur / administrateur)
+- Développement de la **page d’administration des utilisateurs**
+- Configuration de l’**envoi d’emails transactionnels** (confirmation de création de compte)
+- Développement de la **vue Kanban à 3 colonnes** (À faire / En cours / Terminé)
+- Développement du **système multilingue (FR / EN)** avec stockage de la langue dans un cookie
 
 ---
 
@@ -223,14 +225,14 @@ Responsable de la logique métier, de la persistance des données et de la sécu
 
 Responsable de la structure globale du projet, de la cohérence POO et de l’identité visuelle de base.
 
-- ✅ Mise en place de l’**architecture générale de l’application**
-- ✅ Définition des **bonnes pratiques POO** utilisées dans le projet
-- ✅ Contribution à la conception des **modèles métier** (Task, TasksManager)
-- ✅ Vérification de la **cohérence des responsabilités** entre classes
-- ✅ Participation à la structuration du backend (séparation logique métier / affichage)
-- ✅ Création du **logo** et du **favicon**
-- ✅ Mise en place initiale du **système de traduction**
-- ✅ Contribution à la lisibilité et à la maintenabilité du code
+- Mise en place de l’**architecture générale de l’application**
+- Définition des **bonnes pratiques POO** utilisées dans le projet
+- Contribution à la conception des **modèles métier** (Task, TasksManager)
+- Vérification de la **cohérence des responsabilités** entre classes
+- Participation à la structuration du backend (séparation logique métier / affichage)
+- Création du **logo** et du **favicon**
+- Mise en place initiale du **système de traduction**
+- Contribution à la lisibilité et à la maintenabilité du code
 
 ---
 
@@ -240,13 +242,13 @@ Responsable de la structure globale du projet, de la cohérence POO et de l’id
 
 Responsable de la mise en ligne de l’application et de la configuration de l’environnement de production.
 
-- ✅ Prise et gestion du **nom de domaine**
-- ✅ Configuration de l’**hébergement Infomaniak**
-- ✅ Mise en place de l’environnement de production (PHP, base de données MySQL/MariaDB)
-- ✅ Déploiement de l’application web sur Internet
-- ✅ Configuration des **paramètres serveur** nécessaires au bon fonctionnement de l’application
-- ✅ Mise en place et configuration du **service d’envoi d’emails** (SMTP)
-- ✅ Tests de bon fonctionnement en environnement de production (authentification, emails, accès aux pages privées)
+- Prise et gestion du **nom de domaine**
+- Configuration de l’**hébergement Infomaniak**
+- Mise en place de l’environnement de production (PHP, base de données MySQL/MariaDB)
+- Déploiement de l’application web sur Internet
+- Configuration des **paramètres serveur** nécessaires au bon fonctionnement de l’application
+- Mise en place et configuration du **service d’envoi d’emails** (SMTP)
+- Tests de bon fonctionnement en environnement de production (authentification, emails, accès aux pages privées)
 
 ---
 
