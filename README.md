@@ -143,7 +143,7 @@ taskboard/
 - [x]  Gestion d’au moins **deux rôles utilisateurs** (utilisateur standard / administrateur)
 - [x]  **Contrôle des accès** aux pages et aux actions en fonction du rôle
 - [x]  Gestion d’au moins **deux domaines métier liés** (utilisateurs ↔ tâches)
-- [x]  Interface **multilingue (français / anglais)** avec gestion de la langue via **cookie**, conformément au jalon 4
+- [x]  Interface **multilingue (français / anglais)** avec gestion de la langue via **cookie**
 
 ---
 
