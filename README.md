@@ -260,7 +260,6 @@ Responsable de la mise en ligne de l’application et de la configuration de l�
 - Cartes de tâches avec couleurs selon priorité
 - Changement de statut rapide sans rechargement
 - Animations et transitions fluides
-- Support du mode sombre
 
 ### 🔐 Sécurité robuste
 
@@ -331,4 +330,4 @@ Le projet **TaskBoard** répond aux exigences du cahier des charges avec :
 
 ---
 
-**Date de dernière mise à jour :** 16 décembre 2025
+**Date de dernière mise à jour :** 17 décembre 2025
